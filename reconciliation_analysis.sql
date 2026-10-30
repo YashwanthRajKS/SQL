@@ -82,3 +82,12 @@ JOIN invites i ON i.invite_id = r.invite_id
 JOIN contacts c ON c.contact_id = i.contact_id
 JOIN accounts a ON a.account_id = c.account_id
 GROUP BY a.account_name;
+-- Query D: Survey Funnel (invites -> delivered -> responses)
+SELECT
+  COUNT(*) AS invites_sent,
+  SUM(CASE WHEN i.status = 'delivered' THEN 1 ELSE 0 END) AS delivered,
+  COUNT(r.response_id) AS responses,
+  ROUND(100.0 * COUNT(r.response_id) /
+        NULLIF(SUM(CASE WHEN i.status = 'delivered' THEN 1 ELSE 0 END), 0), 1) AS response_rate_pct
+FROM invites i
+LEFT JOIN responses r ON r.invite_id = i.invite_id;
