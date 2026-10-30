@@ -11,7 +11,7 @@ The dataset models four core enterprise tables:
 - **`responses`**: Survey score responses (0–10 scale).
 
 ## Key Data Reconciliation Focus Areas
-1. **Duplicate Detection:** Identifying multi-account duplicate email entries using `GROUP BY` and `HAVING COUNT > 1`.
+1. **Duplicate Detection:** Identifying duplicate email entries using `GROUP BY` and `HAVING COUNT > 1`.
 2. **Orphan Record Resolution:** Finding unlinked contact records using `LEFT JOIN` and `IS NULL` filters.
 3. **CX Metrics Aggregation:** Calculating Net Promoter Score (NPS) programmatically via score conditional aggregation (`CASE WHEN`).
 4. **Zero-Division Safeguards:** Utilizing `NULLIF()` to prevent division-by-zero errors during metric calculation.
